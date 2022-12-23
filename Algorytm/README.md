@@ -23,8 +23,6 @@ Procesy przesyłają dalej (nieblokująco) wiadomości ACK, sprawdzane są tylko
 ## Rysunek poglądowy:
 
 
-
-
 ## Szczegółowy opis algorytmu:
 ### Oznaczenia:
 - N - liczba procesów biorących udział w przetwarzaniu Token - Ring;
@@ -45,7 +43,7 @@ a wiadomości ACK przesyłają dalej bez blokowania.
     - Otrzyma wiadomość ACKxm - przesyła nieblokująco ACKxm dalej w komunikacji ring.
     - Otrzyma Token Tnm - porównuje m z CSC i jeżeli:
         - Token jest przestarzały (m < CSC) - wiadomość jest ignorowana.
-        - Token jest nowy (m >= CSC) to ustawia CSC na m (m = CSC), a następnie:
+        - Token jest nowy (m >= CSC) to ustawia CSC na m (CSC = m), a następnie:
             - Jeżeli proces k oczekiwał na ACKjm to oczekiwanie na ACKjm jest wyłączone, ponieważ dostał nowy token  
             (proces k ma pewność, że token przeszedł przez cały token).
             - Jeżeli proces k nie musi wchodzić do sekcji krytycznej, to przesyła token dalej (wysyła TkCSC do procesu j) i oczekuje wiadomości ACKjm.
@@ -71,11 +69,28 @@ a wiadomości ACK przesyłają dalej bez blokowania.
     - Proces n pozostałe sytuacje (niewypisane) rozważa identycznie jak proces k - dla sprawdzenia w punkcie algorytmu "Proces k, jeżeli [!]" można k zamienić na n, a n na p, natomiast j na k, aby rozważyć wszystkie przypadki.
 
     
+## Aktualny stan algorytmu:
+- Init 
+## Pytania:
+- Czy razem z Tokenem należy wysyłać ID procesu?  
+Opis: Jeżeli token możemy tylko otrzymać od poprzednika, to interesuje nas tylko CSC.  
+Odpowiedź: Prawdopodobnie nie - do przetestowania.
 
+- Jak zauważane jest zgubienie tokenu?  
+Odpowiedź: Proces który wysłał Token nie otrzymał ACK, co może oznaczać zgubienie ACK lub zgubienie tokenu, dlatego ponowna retransmisja tokenu odtwarza token przy domniemaniu jego zgubienia. Dwóch tokenów w ringu nie będzie, ponieważ przestarzałe tokeny za pomocą CSC są ignorowane. 
+
+- Czy potrzebne jest uszeregowanie wiadomości FIFO w kanale?  
+Opis: Jeżeli CSC definiuje nam, czy wiadomości ACK/token są przestarzałe to czy kolejność ACK ma znaczenie?  
+Odpowiedź: Prawdopodobnie rozluźnienie tego założenia może spowodować zbędne retransmisje tokenu - do przetestowania.
+
+- Czy poprawnie są identyfikowane przestarzałe wiadomości?  
+Opis: Czy przestarzała wiadomość to m < CSC czy m <= CSC?  
+Odpowiedź: Chyba jest pewnego rodzaju błąd, jeżeli dostaniesz retransmisje tokena od poprzednika, a sam nie wszedłeś do sekcji krytycznej to m == CSC, a następne procesy mogą być w sekcji / lub nie, ale w każdym razie może być więcej tokenów wtedy z różnym lub identycznym CSC.  
+Rozwiązanie? - Może warto CSC zwiększać o 1 zawsze, bez względu na wejście do sekcji krytycznej - zmiana definicji CSC z liczba wejść do CS na liczba przekazań tokenu.
 
 Autorzy:
 - Julian Helwig 139940
 - Seweryn Kopeć 139959
 
-Specjalność: Systemy rozproszone
+Specjalność: Systemy rozproszone  
 Rok: 2022
