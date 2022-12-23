@@ -21,7 +21,7 @@ Wiadomości T lub ACK z nieprawidłową (przestarzałą) liczbą wejść do sekc
 Procesy przesyłają dalej (nieblokująco) wiadomości ACK, sprawdzane są tylko wiadomości ACK dotyczące siebie i następnika.  
 
 ## Rysunek poglądowy:
-![Rysunek](https://gitlab.repozytoriumwiedzy.tech/studies/swn-2022/blob/main/Algorytm/example.png?raw=true)
+![Rysunek https://gitlab.repozytoriumwiedzy.tech/studies/swn-2022/-/blob/main/Algorytm/example.png](example.png "Rysunek poglądowy")
 
 ## Szczegółowy opis algorytmu:
 ### Oznaczenia:
