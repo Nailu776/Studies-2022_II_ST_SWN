@@ -22,7 +22,6 @@ Procesy przesyłają dalej (nieblokująco) wiadomości ACK, sprawdzane są tylko
 
 ## Rysunek poglądowy:
 
-
 ## Szczegółowy opis algorytmu:
 ### Oznaczenia:
 - N - liczba procesów biorących udział w przetwarzaniu Token - Ring;
@@ -87,6 +86,11 @@ Odpowiedź: Prawdopodobnie rozluźnienie tego założenia może spowodować zbę
 Opis: Czy przestarzała wiadomość to m < CSC czy m <= CSC?  
 Odpowiedź: Chyba jest pewnego rodzaju błąd, jeżeli dostaniesz retransmisje tokena od poprzednika, a sam nie wszedłeś do sekcji krytycznej to m == CSC, a następne procesy mogą być w sekcji / lub nie, ale w każdym razie może być więcej tokenów wtedy z różnym lub identycznym CSC.  
 Rozwiązanie? - Może warto CSC zwiększać o 1 zawsze, bez względu na wejście do sekcji krytycznej - zmiana definicji CSC z liczba wejść do CS na liczba przekazań tokenu.
+
+- Czy wysłanie ACK oprócz trafienia do procesu, od którego dostaliśmy token musi trafiać do naszego procesu, który to ACK wysłał?
+Opis: Ta wiadomość ostatnio wysyłana daje tylko i wyłącznie "pewność", że przekazanie się powiodło i nie będzie zbędnych transmisji przestarzałego tokenu,  
+ale jeżeli nie będzie retransmisji przestarzałego tokenu i tak (bo ACK dostał proces, który nam wysłał token) to co nam daje ta "pewność".
+
 
 Autorzy:
 - Julian Helwig 139940
