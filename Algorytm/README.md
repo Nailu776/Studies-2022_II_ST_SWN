@@ -19,6 +19,8 @@ Procesy wysyłają sobie token, a po otrzymaniu tokenu wysyłają wiadomość AC
 Wiadomości T lub ACK z nieprawidłową (przestarzałą) liczbą TPC są ignorowane.  
 Procesy przesyłają dalej (nieblokująco) wiadomości ACK(TTL,m), jeśli TTL > 1.  
 
+<div style="page-break-after: always;"></div>
+
 ## Rysunek poglądowy:
 ![Rysunek https://gitlab.repozytoriumwiedzy.tech/studies/swn-2022/-/blob/main/Algorytm/example.png](example.png "Rysunek poglądowy")
 
@@ -29,6 +31,8 @@ Procesy przesyłają dalej (nieblokująco) wiadomości ACK(TTL,m), jeśli TTL > 
 - TPC - Token Passing Counter - licznik przejść tokenu między procesami ostatnio widziana przez rozważany proces;
 - T - token, gdzie T(m) oznacza token wysłany z TPC wynoszącym m;
 - ACK - wiadomość acknowledge, gdzie ACK(TTL,m) oznacza ACK z Time To Live wynoszącym TTL oraz z TPC (widzianym z procesu wysyłającego ACK) wynoszącym m;
+
+<div style="page-break-after: always;"></div>
 
 ### Algorytm:
 - Procesy są w stanie wejść do strefy krytycznej jedynie podczas posiadania tokenu.
