@@ -32,7 +32,7 @@ If TTL > 1, the processes don't hold onto message, they pass it to their neighbo
 <div style="page-break-after: always;"></div>
 
 ## Concept image:
-![Picture https://gitlab.hjhp.io/studies/swn-2022/-/blob/main/Algorytm/example.png](example.png "Concept image")
+![Picture Algorytm/example.png](example.png "Concept image")
 
 ## Detailed description:
 ### Variables:
