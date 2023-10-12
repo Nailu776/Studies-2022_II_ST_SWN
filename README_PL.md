@@ -22,7 +22,7 @@ Procesy przesyłają dalej (nieblokująco) wiadomości ACK(TTL,m), jeśli TTL > 
 <div style="page-break-after: always;"></div>
 
 ## Rysunek poglądowy:
-![Rysunek https://gitlab.repozytoriumwiedzy.tech/studies/swn-2022/-/blob/main/Algorytm/example.png](example.png "Rysunek poglądowy")
+![Rysunek z Algorytm/example.png](Algorytm/example.png "Rysunek poglądowy")
 
 ## Szczegółowy opis algorytmu:
 ### Oznaczenia:
